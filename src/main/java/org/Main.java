@@ -10,11 +10,12 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
+
         // Ottieni un'istanza di EntityManager
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BibliotecaPU");
         EntityManager em = emf.createEntityManager();
 
-        // Crea i DAO
+        // Crea i DAO, che forniscono un'interfaccia per interagire con le entità
         ElementoDAO elementoDAO = new ElementoDAO(em);
         LibroDAO libroDAO = new LibroDAO(em);
         RivistaDAO rivistaDAO = new RivistaDAO(em);
@@ -66,7 +67,7 @@ public class Main {
                         ", Data restituzione prevista: " + p.getDataRestituzionePrevista()
         ));
 
-        // Chiudi EntityManager e EntityManagerFactory
+
         em.close();
         emf.close();
     }
