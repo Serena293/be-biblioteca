@@ -10,33 +10,35 @@ public class Prestito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //relazione di molti ad uno con utente, in quanto un utente può prendere molti libri in prestito ma
+    //ogni operazione di prestito è associata ad uno utente
     @ManyToOne
-    @JoinColumn(name = "utente_id", nullable = false)  // Chiave esterna per l'utente
+    @JoinColumn(name = "utente_id") // prende utente dal db
     private Utente utente;
 
     @ManyToOne
-    @JoinColumn(name = "elemento_id", nullable = false)  // Chiave esterna per l'elemento prestato
+    @JoinColumn(name = "elemento_id")  // prende elemento dal db
     private Elemento elementoPrestato;
 
-    @Column(name = "data_inizio_prestito", nullable = false)  // Data di inizio prestito (non nulla)
+    @Column(name = "data_inizio_prestito", nullable = false)   //non può essere nulla
     private LocalDate dataInizioPrestito;
 
-    @Column(name = "data_restituzione_prevista", nullable = false)  // Data di restituzione prevista (non nulla)
+    @Column(name = "data_restituzione_prevista", nullable = false)
     private LocalDate dataRestituzionePrevista;
 
-    @Column(name = "data_restituzione_effettiva")  // Data di restituzione effettiva (può essere nulla)
+    @Column(name = "data_restituzione_effettiva")
     private LocalDate dataRestituzioneEffettiva;
 
-    // Costruttore vuoto (richiesto da JPA)
+    // Costruttore vuoto
     public Prestito() {
     }
 
-    // Costruttore con parametri (opzionale, ma utile)
+    // Costruttore
     public Prestito(Utente utente, Elemento elementoPrestato, LocalDate dataInizioPrestito) {
         this.utente = utente;
         this.elementoPrestato = elementoPrestato;
         this.dataInizioPrestito = dataInizioPrestito;
-        this.dataRestituzionePrevista = dataInizioPrestito.plusDays(30);  // Calcola la data di restituzione prevista
+        this.dataRestituzionePrevista = dataInizioPrestito.plusDays(30);  // Calcola in automatico la data di restituzione
     }
 
     // Getter e Setter

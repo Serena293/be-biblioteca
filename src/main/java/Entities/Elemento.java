@@ -2,26 +2,23 @@ package Entities;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)  // Strategia di ereditarietà
 @Table(name = "elementi")
-public abstract class Elemento {  // Aggiungi 'abstract' qui
+//classe astratta, in quanto non esisterà nessun Elemento
+public abstract class Elemento {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "isbn", unique = true, nullable = false)   //l'id deve essere univoca e non può essere null
+    private Long codiceISBN;
 
-    @Column(unique = true, nullable = false)
-    private String codiceISBN;
-
-    @Column(nullable = false)
+    @Column(nullable = false) //il titolo non può essere null
     private String titolo;
 
-    @Column(name = "anno_pubblicazione", nullable = false)
+    @Column(name = "anno_pubblicazione")
     private int annoPubblicazione;
 
-    @Column(name = "numero_pagine", nullable = false)
+    @Column(name = "numero_pagine")
     private int numeroPagine;
 
     // Costruttore vuoto (richiesto da JPA)
@@ -29,27 +26,19 @@ public abstract class Elemento {  // Aggiungi 'abstract' qui
     }
 
     // Costruttore
-    public Elemento(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine) {
-        this.codiceISBN = codiceISBN;
+    public Elemento( String titolo, int annoPubblicazione, int numeroPagine) {
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
         this.numeroPagine = numeroPagine;
     }
 
     // Getter e Setter
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCodiceISBN() {
+    public Long getCodiceISBN() {
         return codiceISBN;
     }
 
-    public void setCodiceISBN(String codiceISBN) {
+    public void setCodiceISBN(Long codiceISBN) {
         this.codiceISBN = codiceISBN;
     }
 
@@ -77,17 +66,13 @@ public abstract class Elemento {  // Aggiungi 'abstract' qui
         this.numeroPagine = numeroPagine;
     }
 
-    // Metodo toString (utile per debug)
     @Override
     public String toString() {
         return "Elemento{" +
-                "id=" + id +
-                ", codiceISBN='" + codiceISBN + '\'' +
+                "codiceISBN='" + codiceISBN + '\'' +
                 ", titolo='" + titolo + '\'' +
                 ", annoPubblicazione=" + annoPubblicazione +
                 ", numeroPagine=" + numeroPagine +
                 '}';
     }
-
-
     }

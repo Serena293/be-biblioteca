@@ -29,10 +29,10 @@ public class RivistaDAO {
     }
 
     //read
-    public Optional<Rivista> findById(Long id) {
-        Rivista rivista = em.find(Rivista.class, id);
-        return Optional.ofNullable(rivista);
+    public Rivista findById(Long id) {
+        return em.find(Rivista.class, id);
     }
+
 
     //read
     public List<Rivista> findAll() {
@@ -59,7 +59,7 @@ public class RivistaDAO {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            em.remove(em.merge(rivista));  // Assicura che l'istanza sia gestita
+            em.remove(rivista);
             transaction.commit();
         } catch (Exception e) {
             if (transaction.isActive()) {

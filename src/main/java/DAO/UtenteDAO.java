@@ -29,10 +29,10 @@ public class UtenteDAO {
     }
 
     //read
-    public Optional<Utente> findById(Long id) {
-        Utente utente = em.find(Utente.class, id);
-        return Optional.ofNullable(utente);
+    public Utente findById(Long id) {
+        return em.find(Utente.class, id);
     }
+
 
     //read
     public List<Utente> findAll() {

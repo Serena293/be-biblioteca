@@ -6,27 +6,27 @@ import jakarta.persistence.Enumerated;
 
 @Entity
 public class Rivista extends Elemento {
-    // Enumerazione per la periodicità
+
     public enum Periodicita {
         SETTIMANALE,
         MENSILE,
         SEMESTRALE
     }
 
-    @Enumerated(EnumType.STRING)  // Mappa l'enum come una stringa nel database
+    @Enumerated(EnumType.STRING)  // Trasforma il tipo enum in una stringa nel database
     private Periodicita periodicita;
 
     // Costruttore vuoto (richiesto da JPA)
     public Rivista() {
     }
 
-    // Costruttore con parametri (opzionale, ma utile)
-    public Rivista(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, Periodicita periodicita) {
-        super(codiceISBN, titolo, annoPubblicazione, numeroPagine); // Chiamata al costruttore della superclasse
+    // Costruttore
+    public Rivista(String titolo, int annoPubblicazione, int numeroPagine, Periodicita periodicita) {
+        super(titolo, annoPubblicazione, numeroPagine);
         this.periodicita = periodicita;
     }
 
-    // Getter e Setter per periodicita
+    // Getter e Setter
     public Periodicita getPeriodicita() {
         return periodicita;
     }
@@ -39,12 +39,11 @@ public class Rivista extends Elemento {
     @Override
     public String toString() {
         return "Rivista{" +
-                "id=" + getId() +
                 ", codiceISBN='" + getCodiceISBN() + '\'' +
                 ", titolo='" + getTitolo() + '\'' +
                 ", annoPubblicazione=" + getAnnoPubblicazione() +
                 ", numeroPagine=" + getNumeroPagine() +
-                ", periodicita=" + periodicita +
+                ", periodicità=" + periodicita +
                 '}';
     }
 }

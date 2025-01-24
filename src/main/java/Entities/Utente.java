@@ -14,10 +14,10 @@ public class Utente {
     @Column(nullable = false)  // Nome non nullo
     private String nome;
 
-    @Column(nullable = false)  // Cognome non nullo
+    @Column(nullable = false)
     private String cognome;
 
-    @Column(name = "data_nascita", nullable = false)  // Data di nascita non nulla
+    @Column(name = "data_nascita", nullable = false)
     private LocalDate dataNascita;
 
     @Column(name = "numero_tessera", unique = true, nullable = false)  // Numero tessera unico e non nullo
@@ -26,11 +26,11 @@ public class Utente {
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Prestito> prestiti;
 
-    // Costruttore vuoto (richiesto da JPA)
+    // Costruttore vuoto
     public Utente() {
     }
 
-    // Costruttore con parametri (opzionale, ma utile)
+    // Costruttore
     public Utente(String nome, String cognome, LocalDate dataNascita, String numeroTessera) {
         this.nome = nome;
         this.cognome = cognome;
@@ -87,7 +87,7 @@ public class Utente {
         this.prestiti = prestiti;
     }
 
-    // Metodo toString
+
     @Override
     public String toString() {
         return "Utente{" +

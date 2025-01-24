@@ -23,16 +23,17 @@ public class PrestitoDAO {
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
+                System.out.println(e.getMessage());
             }
             throw e;
         }
     }
 
     //read
-    public Optional<Prestito> findById(Long id) {
-        Prestito prestito = em.find(Prestito.class, id);
-        return Optional.ofNullable(prestito);
+    public Prestito findById(Long id) {
+        return em.find(Prestito.class, id);
     }
+
 
     //read
     public List<Prestito> findAll() {
@@ -52,6 +53,9 @@ public class PrestitoDAO {
             }
             throw e;
         }
+        finally {
+            em.close();
+        }
     }
 
     //delete
@@ -64,6 +68,7 @@ public class PrestitoDAO {
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
+                System.out.println(e.getMessage());
             }
             throw e;
         }

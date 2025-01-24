@@ -12,8 +12,8 @@ public class Libro extends Elemento {
     }
 
     // Costruttore
-    public Libro(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
-        super(codiceISBN, titolo, annoPubblicazione, numeroPagine);
+    public Libro(String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
+        super(titolo, annoPubblicazione, numeroPagine);
         this.autore = autore;
         this.genere = genere;
     }
@@ -39,8 +39,7 @@ public class Libro extends Elemento {
     @Override
     public String toString() {
         return "Libro{" +
-                "id=" + getId() +
-                ", codiceISBN='" + getCodiceISBN() + '\'' +
+                "codiceISBN='" + getCodiceISBN() + '\'' +
                 ", titolo='" + getTitolo() + '\'' +
                 ", annoPubblicazione=" + getAnnoPubblicazione() +
                 ", numeroPagine=" + getNumeroPagine() +

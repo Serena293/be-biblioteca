@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ElementoDAO {
-    private final EntityManager em;
+    private final EntityManager em;  //per gestire l'entità
 
+    //costruttore
     public ElementoDAO(EntityManager em) {
         this.em = em;
     }
@@ -23,16 +24,17 @@ public class ElementoDAO {
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
+                System.out.println(e.getMessage());
             }
             throw e;
         }
     }
 
     //read
-    public Optional<Elemento> findById(Long id) {
-        Elemento elemento = em.find(Elemento.class, id);
-        return Optional.ofNullable(elemento);
+    public Elemento findById(Long id) {
+        return em.find(Elemento.class, id);
     }
+
 
     //read
     public List<Elemento> findAll() {
@@ -59,13 +61,14 @@ public class ElementoDAO {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            em.remove(em.merge(elemento));
+            em.remove(elemento);
             transaction.commit();
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw e;
+            }
+        finally {
+            em.close();
         }
-    }
-}
+}}

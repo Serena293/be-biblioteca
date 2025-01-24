@@ -25,10 +25,10 @@ public class Main {
         Utente utente = new Utente("Mario", "Rossi", LocalDate.of(1990, 5, 15), "T12345");
 
         // Crea un'istanza di Libro
-        Libro libro = new Libro("978-8804668237", "Il Signore degli Anelli", 1954, 1216, "J.R.R. Tolkien", "Fantasy");
+        Libro libro = new Libro("Il Signore degli Anelli", 1954, 1216, "J.R.R. Tolkien", "Fantasy");
 
         // Crea un'istanza di Rivista
-        Rivista rivista = new Rivista("977-1123456801", "National Geographic", 2023, 100, Rivista.Periodicita.MENSILE);
+        Rivista rivista = new Rivista("National Geographic", 2023, 100, Rivista.Periodicita.MENSILE);
 
         // Salva utente, libro e rivista nel database
         utenteDAO.save(utente);

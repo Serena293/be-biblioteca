@@ -1,5 +1,6 @@
 package DAO;
 
+import Entities.Elemento;
 import Entities.Libro;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -26,13 +27,16 @@ public class LibroDAO {
             }
             throw e;
         }
+        finally {
+            em.close();
+        }
     }
 
     //read
-    public Optional<Libro> findById(Long id) {
-        Libro libro = em.find(Libro.class, id);
-        return Optional.ofNullable(libro);
+    public Elemento findById(Long id) {
+        return em.find(Elemento.class, id);
     }
+
 
     //read
     public List<Libro> findAll() {
@@ -70,6 +74,7 @@ public class LibroDAO {
     }
 
     // Metodo specifico per cercare libri per autore
+    //TODO: aggiungere scanner
     public List<Libro> findByAutore(String autore) {
         return em.createQuery("SELECT l FROM Libro l WHERE l.autore = :autore", Libro.class)
                 .setParameter("autore", autore)
