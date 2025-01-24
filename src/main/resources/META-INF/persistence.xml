@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             version="2.1">
+
+    <!-- Unità di persistenza -->
+    <persistence-unit name="BibliotecaPU">
+        <!-- Classi gestite da JPA -->
+        <class>Utente</class>
+        <class>ElementoCatalogo</class>
+        <class>Libro</class>
+        <class>Rivista</class>
+        <class>Prestito</class>
+
+        <properties>
+            <!-- Driver di PostgreSQL -->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+            <!-- URL del database -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/biblioteca"/>
+
+            <!-- Nome utente del database -->
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+
+            <!-- Password del database -->
+            <property name="javax.persistence.jdbc.password" value="Afragola2020!"/>
+
+            <!-- Dialetto  -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+            <!-- Modalità di generazione dello schema -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+
+
+        </properties>
+    </persistence-unit>
+</persistence>
